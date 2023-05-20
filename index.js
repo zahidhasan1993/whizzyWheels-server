@@ -31,26 +31,26 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     const database = client.db("whizzywheels");
-    const categoryToyCollections = database.collection('all-toys');
+    const toyCollections = database.collection('all-toys');
 
     //server db routes
     // get db
     app.get('/alltoys',async (req,res) => {
-      const cursor = categoryToyCollections.find();
+      const cursor = toyCollections.find();
       const result = await cursor.toArray();
       res.send(result)
     })
     app.get('/alltoys/:id', async (req,res) => {
       const id = req.params.id;
       const query = { _id : new ObjectId(id)};
-      const result = await categoryToyCollections.findOne(query);
+      const result = await toyCollections.findOne(query);
 
       res.send(result)
     })
     //insert to db
     app.post('/addtoy', async (req,res) => {
         const newToy = req.body;
-        const result = await categoryToyCollections.insertOne(newToy);
+        const result = await toyCollections.insertOne(newToy);
         res.send(result)
         // console.log(newToy);
     })
