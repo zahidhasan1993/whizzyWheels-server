@@ -29,7 +29,6 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
     const database = client.db("whizzywheels");
     const toyCollections = database.collection('all-toys');
 
@@ -55,7 +54,7 @@ async function run() {
         // console.log(newToy);
     })
     //update db
-    app.put('/updatetoy/:id', async (req,res) => {
+    app.patch('/updatetoy/:id', async (req,res) => {
       const id = req.params.id;
       const toy = req.body
       const filter = { _id : new ObjectId(id)};
