@@ -44,7 +44,7 @@ async function run() {
     app.get('/sort',async (req,res) => {
       
       const cursor = toyCollections.find();
-      const result = await cursor.sort({price : -1}).toArray();
+      const result = await cursor.sort({price : 1}).toArray();
       res.send(result)
     })
     //get by id
